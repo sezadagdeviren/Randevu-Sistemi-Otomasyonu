@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <!-- Meta etiketleri ve diğer head içerikleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Sağlık Merkezi</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN (İkonlar için) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS (Scroll Animasyonları için) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- CSS Dosyası -->
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">Sağlık Merkezi</div>
+        <button class="menu-toggle" aria-controls="navbar-menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+            <span class="sr-only">Menüyü Aç</span>
+        </button>
+        <ul class="navbar-menu" id="navbar-menu">
+            <li><a href="index.html">Anasayfa</a></li>
+            <li><a href="index.html#departmanlar">Departmanlar</a></li>
+            <li><a href="index.html#doktorlar">Doktorlar</a></li>
+            <li><a href="index.html#saglik-paketleri">Sağlık Paketleri</a></li>
+            <li><a href="index.html#hasta-rehberi">Hasta Rehberi</a></li>
+            <li><a href="index.html#kariyer">Kariyer</a></li>
+            <!-- Giriş Yap ve Kayıt Ol (Giriş Yapılmadığında Görünecek) -->
+            <li class="guest-menu">
+                <a href="/login.html">Giriş Yap</a>
+                <a href="/register.html">Kayıt Ol</a>
+            </li>
+            <!-- Kullanıcı Menüsü -->
+            <li class="user-menu">
+                <div class="user-icon-container">
+                    <a href="#" class="user-icon">
+                        <i class="fas fa-user"></i>
+                        <span class="username" style="display: none;"></span>
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="profile.html">Bilgilerim</a></li>
+                        <li><a href="#">Ayarlar</a></li>
+                        <li><a href="login.html" id="logout-button">Çıkış Yap</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <!-- Sol Menü -->
+        <aside class="sidebar">
+            <ul>
+                <li class="active"><a href="#" id="genel-bilgiler-link">Genel Bilgiler</a></li>
+                <li><a href="#" id="kullanici-bilgileri-link">Kullanıcı Bilgileri</a></li>
+                <li><a href="#" id="tahlillerim-link">Tahlillerim</a></li>
+                <li><a href="#" id="gecmis-randevularim-link">Geçmiş Randevularım</a></li>
+            </ul>
+        </aside>
+
+        <!-- İçerik Alanı -->
+        <main class="content">
+            <!-- Genel Bilgiler -->
+            <section id="genel-bilgiler-section">
+                <h2>Genel Bilgiler</h2>
+                <form id="genel-bilgiler-form">
+                    <!-- Ad, Soyad, TC Kimlik (Değiştirilemez) -->
+                    <div class="form-group">
+                        <label for="first-name">Ad:</label>
+                        <input type="text" id="first-name" name="first-name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Soyad:</label>
+                        <input type="text" id="last-name" name="last-name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="tc-kimlik">TC Kimlik No:</label>
+                        <input type="text" id="tc-kimlik" name="tc-kimlik" readonly>
+                    </div>
+
+                    <!-- Cinsiyet -->
+                    <div class="form-group">
+                        <label for="gender">Cinsiyet:</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Seçiniz</option>
+                            <option value="Erkek">Erkek</option>
+                            <option value="Kadın">Kadın</option>
+                            <option value="Belirtmek İstemiyorum">Belirtmek İstemiyorum</option>
+                        </select>
+                        <small class="error-message" id="gender-error"></small>
+                    </div>
+
+                    <!-- Doğum Tarihi -->
+                    <div class="form-group">
+                        <label>Doğum Tarihi:</label>
+                        <div class="dob-selectors">
+                            <select id="dob-day" name="dob-day" required>
+                                <option value="">Gün</option>
+                                <!-- 1-31 -->
+                                <!-- Gün seçenekleri JavaScript ile eklenecek -->
+                            </select>
+                            <select id="dob-month" name="dob-month" required>
+                                <option value="">Ay</option>
+                                <!-- Ay isimleri -->
+                                <!-- Ay seçenekleri JavaScript ile eklenecek -->
+                            </select>
+                            <select id="dob-year" name="dob-year" required>
+                                <option value="">Yıl</option>
+                                <!-- 1900 - Günümüz -->
+                                <!-- Yıl seçenekleri JavaScript ile eklenecek -->
+                            </select>
+                        </div>
+                        <small class="error-message" id="dob-error"></small>
+                    </div>
+
+                    <!-- Şehir -->
+                    <div class="form-group">
+                        <label for="city">Şehir:</label>
+                        <input type="text" id="city" name="city" required>
+                        <small class="error-message" id="city-error"></small>
+                    </div>
+
+                    <!-- Adres -->
+                    <div class="form-group">
+                        <label for="address">Adres:</label>
+                        <textarea id="address" name="address" rows="3" required></textarea>
+                        <small class="error-message" id="address-error"></small>
+                    </div>
+
+                    <!-- Telefon -->
+                    <div class="form-group">
+                        <label for="phone">Telefon:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <small class="error-message" id="phone-error"></small>
+                    </div>
+
+                    <!-- Kan Grubu -->
+                    <div class="form-group">
+                        <label for="blood-type">Kan Grubu:</label>
+                        <select id="blood-type" name="blood-type" required>
+                            <option value="">Seçiniz</option>
+                            <option value="A+">A Rh+</option>
+                            <option value="A-">A Rh-</option>
+                            <option value="B+">B Rh+</option>
+                            <option value="B-">B Rh-</option>
+                            <option value="AB+">AB Rh+</option>
+                            <option value="AB-">AB Rh-</option>
+                            <option value="0+">0 Rh+</option>
+                            <option value="0-">0 Rh-</option>
+                        </select>
+                        <small class="error-message" id="blood-type-error"></small>
+                    </div>
+
+                    <!-- Boy ve Kilo -->
+                    <div class="form-group">
+                        <label for="height">Boy (cm):</label>
+                        <input type="number" id="height" name="height" required>
+                        <small class="error-message" id="height-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Kilo (kg):</label>
+                        <input type="number" id="weight" name="weight" required>
+                        <small class="error-message" id="weight-error"></small>
+                    </div>
+
+                    <!-- IBAN (Opsiyonel) -->
+                    <div class="form-group">
+                        <label for="iban">IBAN:</label>
+                        <input type="text" id="iban" name="iban">
+                        <small class="error-message" id="iban-error"></small>
+                    </div>
+
+                    <button type="submit" class="btn">Bilgilerimi Kaydet</button>
+                </form>
+            </section>
+
+            <!-- Kullanıcı Bilgileri -->
+            <section id="kullanici-bilgileri-section" style="display: none;">
+                <h2>Kullanıcı Bilgileri</h2>
+                <form id="kullanici-bilgileri-form">
+                    <!-- Kullanıcı Adı ve E-posta -->
+                    <div class="form-group">
+                        <label for="username">Kullanıcı Adı:</label>
+                        <input type="text" id="username" name="username" required>
+                        <small class="error-message" id="username-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta:</label>
+                        <input type="email" id="email" name="email" required>
+                        <small class="error-message" id="email-error"></small>
+                    </div>
+
+                    <!-- Yeni Şifre ve Tekrarı -->
+                    <div class="form-group password-group">
+                        <label for="new-password">Yeni Şifre:</label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password">
+                            <span class="toggle-password">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <small class="error-message" id="new-password-error"></small>
+                    </div>
+                    <div class="form-group password-group">
+                        <label for="confirm-password">Yeni Şifre Tekrarı:</label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password">
+                            <span class="toggle-password">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <small class="error-message" id="confirm-password-error"></small>
+                    </div>
+
+                    <button type="submit" class="btn">Bilgilerimi Güncelle</button>
+                </form>
+            </section>
+
+            <!-- Tahlillerim -->
+            <section id="tahlillerim-section" style="display: none;">
+                <h2>Tahlillerim</h2>
+                <p>Bu bölüm yakında eklenecek.</p>
+            </section>
+
+            <!-- Geçmiş Randevularım -->
+            <section id="gecmis-randevularim-section" style="display: none;">
+                <h2>Geçmiş Randevularım</h2>
+                <table id="gecmis-randevular-table">
+                    <thead>
+                        <tr>
+                            <th>Randevu Tarihi</th>
+                            <th>Randevu Saati</th>
+                            <th>Departman Adı</th>
+                            <th>Doktor Adı</th>
+                            <th>Randevu Tipi</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Randevu verileri JavaScript ile doldurulacak -->
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Dosyaları -->
+    <script src="js/profile.js"></script>
+    <!-- Ortak işlevler için script.js dosyasını ekleyin -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+/* public/css/doctor-dashboard.css */
+
+/* Genel Stiller */
+body {
+    background-color: #f8f9fa;
+}
+
+h1,
+h2,
+h4 {
+    color: #343a40;
+}
+
+/* Card Stilleri */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Tablo Stilleri */
+#appointmentsTable th,
+#appointmentsTable td {
+    vertical-align: middle;
+}
+
+/* Buton Stilleri */
+.btn-success,
+.btn-danger,
+.btn-secondary {
+    display: flex;
+    align-items: center;
+}
+
+.btn-success i,
+.btn-danger i,
+.btn-secondary i {
+    margin-right: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Modern Register Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <!-- Google Font (Montserrat) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+  <!-- Özel CSS -->
+  <link rel="stylesheet" href="css/register.css" />
+</head>
+
+<body>
+  <div class="container" id="container">
+    <!-- Tek form yapısı -->
+    <div class="form-container sign-up">
+      <form id="registerForm" novalidate>
+        <h1>Kayıt Ol</h1>
+        <span>Aşağıdaki alanları doldurun</span>
+
+        <!-- Ad -->
+        <input type="text" id="first_name" placeholder="Ad (Sadece harf)" maxlength="30" required />
+        <!-- Soyad -->
+        <input type="text" id="last_name" placeholder="Soyad (Sadece harf)" maxlength="30" required />
+        <!-- TC Kimlik -->
+        <input type="text" id="tc_kimlik" placeholder="TC Kimlik Numarası (11 hane)" maxlength="11" required />
+        <!-- Kullanıcı Adı -->
+        <input type="text" id="username" placeholder="Kullanıcı Adı (Sadece harf)" maxlength="30" required />
+        <!-- Email -->
+        <input type="email" id="email" placeholder="Email" required />
+        <!-- Şifre -->
+        <div class="password-field">
+          <input type="password" id="password" placeholder="Şifre" required />
+          <span class="toggle-icon" id="togglePasswordBtn">
+            <i class="fas fa-eye-slash"></i>
+          </span>
+        </div>
+        <!-- Şifre Tekrar -->
+        <div class="password-field">
+          <input type="password" id="password_confirm" placeholder="Şifre Tekrar" required />
+          <span class="toggle-icon" id="togglePasswordConfirmBtn">
+            <i class="fas fa-eye-slash"></i>
+          </span>
+        </div>
+
+        <button type="submit" class="btn-register">Kayıt Ol</button>
+      </form>
+      Zaten hesabınız var mı? Giriş Yapın <a href="/login.html">Giriş Yap</a>
+    </div>
+    <!-- Arka plan paneli -->
+    <div class="toggle-container">
+      <div class="toggle-panel">
+        <h1>Hoş Geldiniz!</h1>
+        <p>
+          Randevu sistemimize kayıt olarak bütün özelliklerden
+          yararlanabilirsiniz.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Özel JS -->
+  <script src="js/register.js"></script>
+</body>
+
+</html>

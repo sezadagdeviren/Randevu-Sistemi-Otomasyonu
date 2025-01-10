@@ -1,0 +1,459 @@
+<!-- views/index.html -->
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sağlık Merkezi</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN (İkonlar için) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS CSS (Scroll Animasyonları için) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- CSS Dosyanızı Bağlayın -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-brand">Sağlık Merkezi</div>
+    <button class="menu-toggle" aria-controls="navbar-menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+      <span class="sr-only">Menüyü Aç</span>
+    </button>
+    <ul class="navbar-menu" id="navbar-menu">
+      <li><a href="index.html">Anasayfa</a></li>
+      <li><a href="index.html#departmanlar">Departmanlar</a></li>
+      <li><a href="index.html#doktorlar">Doktorlar</a></li>
+      <li><a href="index.html#saglik-paketleri">Sağlık Paketleri</a></li>
+      <li><a href="index.html#hasta-rehberi">Hasta Rehberi</a></li>
+      <li><a href="index.html#kariyer">Kariyer</a></li>
+      <!-- Giriş Yap ve Kayıt Ol (Giriş Yapılmadığında Görünecek) -->
+      <li class="guest-menu">
+        <a href="/login.html">Giriş Yap</a>
+        <a href="/register.html">Kayıt Ol</a>
+      </li>
+      <!-- Kullanıcı Menüsü -->
+      <li class="user-menu" style="display: none;">
+        <div class="user-icon-container">
+          <a href="#" class="user-icon">
+            <i class="fas fa-user"></i>
+            <span class="username"></span>
+            <i class="fas fa-caret-down"></i>
+          </a>
+          <ul class="dropdown">
+            <li><a href="profile.html">Bilgilerim</a></li>
+            <li><a href="#">Ayarlar</a></li>
+            <li><a href="#" id="logout-button">Çıkış Yap</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <!-- Overlay (Menü Açıldığında Arka Planı Karanlıklaştırmak için) -->
+  <div class="overlay" id="menu-overlay"></div>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero" data-aos="fade-in">
+      <div class="slideshow-container" aria-label="Görsel Slayt Gösterisi">
+        <!-- Slideshow Resimleri -->
+        <div class="slide fade" aria-hidden="false">
+          <img src="images/hero1.jpg" alt="Görünüm 1 - Sağlık Merkezi" loading="lazy">
+        </div>
+        <div class="slide fade" aria-hidden="true">
+          <img src="images/hero2.jpg" alt="Görünüm 2 - Sağlık Merkezi" loading="lazy">
+        </div>
+        <div class="slide fade" aria-hidden="true">
+          <img src="images/hero3.jpg" alt="Görünüm 3 - Sağlık Merkezi" loading="lazy">
+        </div>
+        <div class="slide fade" aria-hidden="true">
+          <img src="images/hero4.jpg" alt="Görünüm 4 - Sağlık Merkezi" loading="lazy">
+        </div>
+        <div class="slide fade" aria-hidden="true">
+          <img src="images/hero5.jpg" alt="Görünüm 5 - Sağlık Merkezi" loading="lazy">
+        </div>
+        <div class="slide fade" aria-hidden="true">
+          <img src="images/hero6.jpg" alt="Görünüm 6 - Sağlık Merkezi" loading="lazy">
+        </div>
+
+        <!-- Sağ/Sol Oklar -->
+        <a class="prev" onclick="changeSlide(-1)" aria-label="Önceki Slide"><i class="fas fa-chevron-left"></i></a>
+        <a class="next" onclick="changeSlide(1)" aria-label="Sonraki Slide"><i class="fas fa-chevron-right"></i></a>
+      </div>
+
+      <!-- Daire Göstergeleri -->
+      <div class="dots-container" role="tablist">
+        <span class="dot active" onclick="goToSlide(1)" role="tab" aria-selected="true"></span>
+        <span class="dot" onclick="goToSlide(2)" role="tab" aria-selected="false"></span>
+        <span class="dot" onclick="goToSlide(3)" role="tab" aria-selected="false"></span>
+        <span class="dot" onclick="goToSlide(4)" role="tab" aria-selected="false"></span>
+        <span class="dot" onclick="goToSlide(5)" role="tab" aria-selected="false"></span>
+        <span class="dot" onclick="goToSlide(6)" role="tab" aria-selected="false"></span>
+      </div>
+
+      <!-- Sol Taraf Düğmeleri -->
+      <div class="hero-buttons">
+        <a href="pending-video-call.html" class="hero-btn btn1" data-aos="zoom-in"><i class="fas fa-video"></i>
+          Görüntülü
+          Görüşme
+        </a>
+        <a href="pending-examination.html" class="hero-btn btn2" data-aos="zoom-in" data-aos-delay="100"><i
+            class="fas fa-calendar-alt"></i> Muayene Randevusu</a>
+        <a href="esonuc.html" class="hero-btn btn3" data-aos="zoom-in" data-aos-delay="200"><i
+            class="fas fa-file-alt"></i>
+          E-Sonuç</a>
+        <a href="#" class="hero-btn btn4" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-heart"></i>
+          Sağlık Paketleri</a>
+      </div>
+    </section>
+
+    <!-- Hakkımızda Bölümü -->
+    <section id="hakkimizda" class="hakkimizda">
+      <div class="hakkimizda-header">
+        <h2>Hakkımızda</h2> <!-- Hakkımızda Başlığı -->
+      </div>
+
+      <div class="hakkimizda-container">
+        <!-- Nitelikli Doktorlar -->
+        <div class="hakkimizda-item" data-aos="zoom-in">
+          <div class="icon-container">
+            <i class="fas fa-stethoscope"></i> <!-- Stetoskop ikonu -->
+          </div>
+          <h2>Nitelikli Doktorlar</h2>
+          <p>
+            Medical Istanbul Care, uzman ve deneyimli hekim kadrosu ile 7/24 sağlıklı yaşam için özveriyle
+            çalışmaktadır.
+            Hastalarımızdan aldığımız özgüven ve değer ile dünya ile eş zamanlı olarak çağın sunduğu en
+            gelişmiş teşhis ve tedavi yöntemlerini kullanıyoruz.
+          </p>
+        </div>
+
+        <!-- Acil Bakım -->
+        <div class="hakkimizda-item" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-container">
+            <i class="fas fa-ambulance"></i> <!-- Ambulans ikonu -->
+          </div>
+          <h2>Acil Bakım</h2>
+          <p>
+            Medical İstanbul Care, anlaştığı hastaneler ile birlikte, Acil Servis bölümünde, uzman ve
+            dinamik kadromuz ile güncel ve bilimsel doğrular ışığında çocuk ve yetişkin hastalarımızın
+            sağlığını esas alarak 7 gün 24 saat hizmet verilmektedir.
+          </p>
+        </div>
+
+        <!-- Özverili Bakım -->
+        <div class="hakkimizda-item" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-container">
+            <i class="fas fa-heartbeat"></i> <!-- Kalp atışı ikonu -->
+          </div>
+          <h2>Özverili Bakım</h2>
+          <p>
+            Acil Servis uzman doktorları tarafından değerlendirilen hastalarımız ilgili tetkik ve
+            tedavilerini takiben gereğinde ilgili tıbbi bölümlere hızla sevk edilmektedir. Ayrıca gerektiği
+            durumlarda ambulansımız ile hasta nakli, transport küvöz ile yeni doğan bebek nakli
+            yapılabilmektedir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Departmanlar Bölümü -->
+    <section class="departmanlar" data-aos="fade-up">
+      <div class="departman-header">
+        <h2>Departmanlarımız</h2>
+
+      </div>
+      <div class="departman-container">
+        <div class="departman" data-aos="zoom-in">
+          <img src="images/departman1.jpg" alt="Kardiyoloji Departmanı" loading="lazy">
+          <div class="departman-content">
+            <h3>Kardiyoloji</h3>
+          </div>
+        </div>
+        <div class="departman" data-aos="zoom-in" data-aos-delay="100">
+          <img src="images/departman2.jpg" alt="Nöroloji Departmanı" loading="lazy">
+          <div class="departman-content">
+            <h3>Nöroloji</h3>
+          </div>
+        </div>
+        <div class="departman" data-aos="zoom-in" data-aos-delay="200">
+          <img src="images/departman3.jpg" alt="Gastroenteroloji Departmanı" loading="lazy">
+          <div class="departman-content">
+            <h3>Gastroenteroloji</h3>
+          </div>
+        </div>
+        <div class="departman" data-aos="zoom-in" data-aos-delay="300">
+          <img src="images/departman4.jpg" alt="Pediatri Departmanı" loading="lazy">
+          <div class="departman-content">
+            <h3>Pediatri</h3>
+          </div>
+        </div>
+      </div>
+      <div class="view-all-container">
+        <a href="#" class="view-all-btn">Tümünü Görüntüle <i class="fas fa-chevron-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Doktorlar Bölümü -->
+    <section id="doktorlar" class="doktorlar">
+      <div class="doktorlar-header">
+        <h2>Doktorlarımız</h2>
+      </div>
+      <div class="doktorlar-container">
+        <!-- Doktorlar Kartları -->
+        <div class="doktor-item" data-aos="zoom-in">
+          <img src="images/doktor1.png" alt="Doktor 1">
+          <h3>Dr. Ahmet Yılmaz</h3>
+          <p>Kardiyoloji Uzmanı</p>
+        </div>
+        <div class="doktor-item" data-aos="zoom-in" data-aos-delay="100">
+          <img src="images/doktor2.png" alt="Doktor 2">
+          <h3>Dr. Elif Kara</h3>
+          <p>Dermatoloji Uzmanı</p>
+        </div>
+        <div class="doktor-item" data-aos="zoom-in" data-aos-delay="200">
+          <img src="images/doktor3.png" alt="Doktor 3">
+          <h3>Dr. Mehmet Aydın</h3>
+          <p>Nöroloji Uzmanı</p>
+        </div>
+        <div class="doktor-item" data-aos="zoom-in" data-aos-delay="300">
+          <img src="images/doktor4.png" alt="Doktor 4">
+          <h3>Dr. Zeynep Çelik</h3>
+          <p>Gastroenteroloji Uzmanı</p>
+        </div>
+        <div class="doktor-item" data-aos="zoom-in" data-aos-delay="400">
+          <img src="images/doktor5.png" alt="Doktor 5">
+          <h3>Dr. Ali Veli</h3>
+          <p>Pediatri Uzmanı</p>
+        </div>
+      </div>
+      <div class="view-all-container">
+        <a href="patient-dashboard.html" class="view-all-btn">Tümünü Görüntüle</a>
+      </div>
+    </section>
+
+    <!-- Hasta Rehberi Bölümü -->
+    <section class="hasta-rehberi" data-aos="fade-up">
+      <div class="hasta-header">
+        <h2>Hasta Rehberi</h2>
+      </div>
+      <div class="rehberi-container">
+        <!-- 1. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="100">
+          <img src="images/rehberi1.jpg" alt="Kemik İliği Kanseri Nedir? Ayak Yanığı Nedir?" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Kemik İliği Kanseri Nedir? Ayak Yanığı Nedir?</div>
+            <span class="saglikRehberiTitleTag">Ortopedi ve Travmatoloji</span>
+          </div>
+        </div>
+
+        <!-- 2. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="200">
+          <img src="images/rehberi2.jpg" alt="Eksfoliatif Sitoloji Smear Alınması" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Eksfoliatif Sitoloji Smear Alınması</div>
+            <span class="saglikRehberiTitleTag">Kadın Hastalıkları ve Doğum</span>
+          </div>
+        </div>
+
+        <!-- 3. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="300">
+          <img src="images/rehberi3.jpg" alt="Kemik İliği Kanseri Alkalen Fosfataz Nedir?" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Kemik İliği Kanseri Alkalen Fosfataz Nedir?</div>
+            <span class="saglikRehberiTitleTag">Medikal Onkoloji</span>
+          </div>
+        </div>
+
+        <!-- 4. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="400">
+          <img src="images/rehberi4.jpg" alt="Kemikte Skleroz Nedir?" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Kemikte Skleroz Nedir?</div>
+            <span class="saglikRehberiTitleTag">Ortopedi ve Travmatoloji</span>
+          </div>
+        </div>
+
+        <!-- 5. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="500">
+          <img src="images/rehberi5.jpg" alt="Kafada Kemik Şişliği Neden Olur?" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Kafada Kemik Şişliği Neden Olur?</div>
+            <span class="saglikRehberiTitleTag">Nöroloji</span>
+          </div>
+        </div>
+
+        <!-- 6. Rehberi Item -->
+        <div class="rehberi-item" data-aos="fade-up" data-aos-delay="600">
+          <img src="images/rehberi6.jpg" alt="Ayak Yanığı Nasıl Geçer?" loading="lazy">
+          <div class="rehberi-overlay">
+            <div class="saglikRehberiTextTitle">Ayak Yanığı Nasıl Geçer?</div>
+            <span class="saglikRehberiTitleTag">Dermatoloji</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sağlık Paketleri Bölümü -->
+    <section class="saglik-paketleri" data-aos="fade-up">
+      <div class="paket-header">
+        <h2>Sağlık Paketlerimiz</h2>
+      </div>
+      <div class="paket-container">
+        <div class="paket-item" data-aos="zoom-in">
+          <i class="fas fa-stethoscope fa-3x"></i>
+          <h3>Check-up Paketi</h3>
+        </div>
+        <div class="paket-item" data-aos="zoom-in" data-aos-delay="100">
+          <i class="fas fa-heartbeat fa-3x"></i>
+          <h3>Kalp Kontrol Programları</h3>
+        </div>
+        <div class="paket-item" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fas fa-ribbon fa-3x"></i>
+          <h3>Kanser Kontrol Paketi</h3>
+        </div>
+        <div class="paket-item" data-aos="zoom-in" data-aos-delay="300">
+          <i class="fas fa-baby fa-3x"></i>
+          <h3>Doğum Kontrolleri Paketi</h3>
+        </div>
+        <div class="paket-item" data-aos="zoom-in" data-aos-delay="400">
+          <i class="fas fa-utensils fa-3x"></i>
+          <h3>Beslenme Kontrol Paketi</h3>
+        </div>
+        <div class="paket-item" data-aos="zoom-in" data-aos-delay="500">
+          <i class="fas fa-spa fa-3x"></i>
+          <h3>Estetik Paketi</h3>
+        </div>
+      </div>
+      <!-- "Tüm Paketler" Butonu -->
+      <div class="view-all-paket-container">
+        <a href="tum-paketler.html" class="view-all-paket-btn">Tüm Paketler <i class="fas fa-chevron-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Sağlık Grubu Bölümü -->
+    <section class="saglik-grubu" data-aos="fade-up">
+      <div class="grup-header">
+        <h2>Sağlık Grubumuz</h2>
+      </div>
+      <div class="grup-container">
+        <div class="grup-item" data-aos="zoom-in">
+          <div class="grup-icon">
+            <i class="fas fa-users fa-3x"></i>
+          </div>
+          <div class="grup-content">
+            <h3>Sağlık Grubu</h3>
+            <p data-target="94">0</p>
+          </div>
+        </div>
+        <div class="grup-item" data-aos="zoom-in" data-aos-delay="100">
+          <div class="grup-icon">
+            <i class="fas fa-hospital fa-3x"></i>
+          </div>
+          <div class="grup-content">
+            <h3>Tıbbi Birim</h3>
+            <p data-target="1200">0</p>
+          </div>
+        </div>
+        <div class="grup-item" data-aos="zoom-in" data-aos-delay="200">
+          <div class="grup-icon">
+            <i class="fas fa-user-md fa-3x"></i>
+          </div>
+          <div class="grup-content">
+            <h3>Hekim</h3>
+            <p data-target="12000">0</p>
+          </div>
+        </div>
+        <div class="grup-item" data-aos="zoom-in" data-aos-delay="300">
+          <div class="grup-icon">
+            <i class="fas fa-briefcase-medical fa-3x"></i>
+          </div>
+          <div class="grup-content">
+            <h3>Personel</h3>
+            <p data-target="5000000">0</p>
+          </div>
+        </div>
+        <div class="grup-item" data-aos="zoom-in" data-aos-delay="400">
+          <div class="grup-icon">
+            <i class="fas fa-calendar-check fa-3x"></i>
+          </div>
+          <div class="grup-content">
+            <h3>Yıllık Ortalama Hasta Sayısı</h3>
+            <p data-target="15000">0</p> <!-- Örnek bir istatistik eklendi -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hastalarımızın Hakkındaki Düşünceleri (Slider) -->
+    <section id="hastalar" class="hastalar">
+      <div class="hastalar-header">
+        <h2>Hastalarımızın Hakkındaki Düşünceleri</h2>
+      </div>
+      <div class="hastalar-slider" data-aos="fade-up">
+        <!-- Slider İçeriği -->
+        <div class="slider-item" data-aos="fade-up" data-aos-delay="100">
+          <p>"Çok memnun kaldım, muayene sırasında doktorum çok nazikti ve doğru teşhis koydu."</p>
+          <span>- Ayşe T.</span>
+        </div>
+        <div class="slider-item" data-aos="fade-up" data-aos-delay="200">
+          <p>"Hizmetten çok memnun kaldım, acil servis gerçekten çok hızlıydı."</p>
+          <span>- Mehmet B.</span>
+        </div>
+        <div class="slider-item" data-aos="fade-up" data-aos-delay="300">
+          <p>"Gerçekten profesyonel bir ekip, hastanızı güvenle teslim edebilirsiniz."</p>
+          <span>- Fatma K.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chatbot Butonu -->
+  <div class="chatbot-button" id="chatbot-button" aria-label="Chatbot Aç">
+    <i class="fas fa-comment-dots"></i>
+  </div>
+
+  <!-- Chatbot Penceresi -->
+  <div class="chatbot-window" id="chatbot-window" role="dialog" aria-modal="true" aria-labelledby="chatbot-title">
+    <div class="chatbot-header">
+      <h3 id="chatbot-title">Sağlık Chatbot</h3>
+      <span class="close-chatbot" id="close-chatbot" aria-label="Chatbot Kapat">&times;</span>
+    </div>
+    <div class="chatbot-body" id="chatbot-body">
+      <!-- İlk selamlama bot mesajı -->
+      <div class="bot-message">
+        <p>Merhaba! Size nasıl yardımcı olabilirim?</p>
+      </div>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="user-input" placeholder="Mesajınızı yazın..." aria-label="Chatbot Mesaj Girişi">
+      <button id="send-button" aria-label="Mesaj Gönder"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 Sağlık Merkezi. Tüm hakları saklıdır.</p>
+      <ul class="social-links">
+        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- AOS JS (Scroll Animasyonları için) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- JavaScript Dosyanızı Bağlayın -->
+  <script src="js/script.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+
+</html>

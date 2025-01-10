@@ -1,0 +1,28 @@
+/* public/css/pending-video-call.css */
+
+/* Genel Stiller */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Tablo Stilleri */
+#videoAppointmentsTable th,
+#videoAppointmentsTable td {
+    vertical-align: middle;
+}
+
+/* Buton Stilleri */
+.join-meet-btn i,
+.cancel-appointment-btn i {
+    margin-right: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #videoAppointmentsTable img {
+        width: 100%;
+        height: auto;
+    }
+}

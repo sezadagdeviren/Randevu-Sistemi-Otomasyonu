@@ -1,0 +1,390 @@
+/* profile.css */
+
+/* Genel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow: hidden;
+    /* Sayfanın kaydırılmasını engelle */
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    height: calc(100% - 60px);
+    /* Navbar yüksekliğini çıkartıyoruz */
+}
+
+/* Navbar Stilleri */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #ecf0f1;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-menu li {
+    margin-left: 20px;
+}
+
+.navbar-menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+    color: #3498db;
+}
+
+
+
+
+/* Guest Menu */
+.guest-menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.guest-menu a:hover {
+    color: #3498db;
+}
+
+/* Kullanıcı Menüsü */
+.user-menu {
+    position: relative;
+}
+
+.user-icon-container {
+    position: relative;
+}
+
+.user-icon {
+    color: #ecf0f1;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 0 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.user-icon i {
+    margin-right: 5px;
+}
+
+.user-icon .username {
+    margin-right: 5px;
+}
+
+.user-icon:hover {
+    color: #3498db;
+}
+
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    background-color: #34495e;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.user-menu .dropdown li {
+    padding: 10px 20px;
+}
+
+.user-menu .dropdown li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.user-menu .dropdown li a:hover {
+    color: #3498db;
+}
+
+/* Dropdown Menüsü Dışına Tıklandığında Kapanması İçin */
+body {
+    position: relative;
+}
+
+
+
+/* Menü Açma Butonu (Mobil) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ecf0f1;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: auto;
+    /* Sağ tarafa yasla */
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/* Ana İçerik */
+.container {
+    display: flex;
+}
+
+/* Sidebar Stilleri */
+.sidebar {
+    width: 200px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 15px;
+}
+
+.sidebar a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.sidebar a:hover,
+.sidebar .active a {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* İçerik Alanı */
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+    /* İçerik alanında kaydırma */
+}
+
+.content h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Form Stilleri */
+form {
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group input[readonly] {
+    background-color: #e9ecef;
+}
+
+.dob-selectors {
+    display: flex;
+    gap: 10px;
+}
+
+.dob-selectors select {
+    flex: 1;
+}
+
+/* Şifre Göster/Gizle */
+.password-group {
+    position: relative;
+}
+
+.password-input {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+.toggle-password:hover {
+    color: #2c3e50;
+}
+
+.btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* Hata Mesajları */
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+/* Geçmiş Randevular Tablosu */
+#gecmis-randevular-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#gecmis-randevular-table th,
+#gecmis-randevular-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#gecmis-randevular-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#gecmis-randevular-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#gecmis-randevular-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: calc(100% - 60px);
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 0;
+        height: 50px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .sidebar ul {
+        display: flex;
+    }
+
+    .sidebar li {
+        margin-bottom: 0;
+        flex: 1;
+    }
+
+    .sidebar a {
+        padding: 10px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .content {
+        height: calc(100% - 50px);
+    }
+
+
+
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar-menu {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background-color: #2c3e50;
+        transition: left 0.3s ease;
+    }
+
+    .navbar-menu.active {
+        left: 0;
+    }
+
+    .navbar-menu li {
+        margin: 15px 0;
+        text-align: center;
+    }
+}

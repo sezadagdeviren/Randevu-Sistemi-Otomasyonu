@@ -1,0 +1,27 @@
+/* public/css/pending-examination.css */
+
+/* Genel Stiller */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Tablo Stilleri */
+#examinationAppointmentsTable th,
+#examinationAppointmentsTable td {
+    vertical-align: middle;
+}
+
+/* Buton Stilleri */
+.cancel-appointment-btn i {
+    margin-right: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #examinationAppointmentsTable img {
+        width: 100%;
+        height: auto;
+    }
+}

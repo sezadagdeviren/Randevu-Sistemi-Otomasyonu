@@ -1,0 +1,219 @@
+<!-- patient-dashboard.html -->
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Paneli</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (İkonlar için) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Özel CSS -->
+    <link rel="stylesheet" href="css/patient-dashboard.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row vh-100">
+            <!-- Sol Sidebar: Departmanlar -->
+            <aside class="col-md-3 bg-light border-end overflow-auto sidebar" aria-label="Departmanlar">
+                <h3 class="text-center my-4">Departmanlar</h3>
+                <!-- Departman Arama -->
+                <div class="input-group mb-3 mx-3">
+                    <input type="text" id="departmentSearch" class="form-control" placeholder="Departman Ara" aria-label="Departman Ara">
+                    <button id="searchDepartmentBtn" class="btn btn-primary" aria-label="Departman Ara">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <!-- Departman Listesi -->
+                <ul id="departmentsList" class="list-group mx-3" role="list">
+                    <!-- Departmanlar burada listelenecek -->
+                </ul>
+                <!-- Sayfalama -->
+                <nav aria-label="Departman Sayfalama" class="mt-3 mx-3">
+                    <ul id="departmentsPagination" class="pagination justify-content-center">
+                        <!-- Sayfalama butonları buraya yüklenecek -->
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Sağ Bölüm: Doktorlar -->
+            <main class="col-md-9 right-section" role="main">
+                <h1 class="text-center my-4">Doktorlar</h1>
+                <!-- Doktor Arama -->
+                <div class="input-group mb-3 mx-3">
+                    <input type="text" id="doctorSearch" class="form-control" placeholder="Doktor Ara" aria-label="Doktor Ara">
+                    <button id="searchDoctorBtn" class="btn btn-success" aria-label="Doktor Ara">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <!-- Filtreleme ve Sıralama -->
+                <div class="d-flex justify-content-end mb-3 mx-3">
+                    <select id="doctorFilter" class="form-select w-auto me-2" aria-label="Doktor Filtrele">
+                        <option value="">Tümü</option>
+                        <option value="experience">Deneyime Göre</option>
+                        <option value="rating">Puanına Göre</option>
+                    </select>
+                    <select id="doctorSort" class="form-select w-auto" aria-label="Doktor Sırala">
+                        <option value="">Sırala</option>
+                        <option value="asc">A'dan Z'ye</option>
+                        <option value="desc">Z'den A'ya</option>
+                    </select>
+                </div>
+                <!-- Doktor Listesi -->
+                <div id="doctorsList" class="row g-3 mx-3" role="list">
+                    <!-- Doktor kartları buraya yüklenecek -->
+                </div>
+                <!-- Sayfalama -->
+                <nav aria-label="Doktor Sayfalama" class="mt-3 mx-3">
+                    <ul id="doctorsPagination" class="pagination justify-content-center">
+                        <!-- Sayfalama butonları buraya yüklenecek -->
+                    </ul>
+                </nav>
+            </main>
+        </div>
+    </div>
+
+    <!-- Doktor Detay Modalı -->
+    <div class="modal fade" id="doctorDetailModal" tabindex="-1" aria-labelledby="doctorDetailModalLabel" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="doctorDetailModalLabel" class="modal-title">Doktor Detayları</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img id="detailDoctorImage" src="" alt="Doktor Resmi" class="img-fluid rounded doctor-image" loading="lazy">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 id="detailDoctorName"></h3>
+                            <p><strong>Uzmanlık:</strong> <span id="detailDoctorSpecialization"></span></p>
+                            <p><strong>Departman:</strong> <span id="detailDoctorDepartment"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Randevu Alma Modalı -->
+    <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="appointmentModalLabel" class="modal-title">Randevu Al</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Randevu Alma Formu -->
+                    <form id="appointmentForm" novalidate>
+                        <input type="hidden" id="appointmentDoctorId" name="doctor_id">
+                        <!-- Randevu Tipi ve İkonları -->
+                        <div class="mb-3">
+                            <label for="appointmentType" class="form-label">Randevu Tipi</label>
+                            <div class="d-flex align-items-center">
+                                <select class="form-select me-2" id="appointmentType" name="appointment_type" required aria-required="true">
+                                    <option value="">Seçiniz</option>
+                                    <option value="Görüntülü Görüşme">Görüntülü Görüşme</option>
+                                    <option value="Muayene Randevusu">Muayene Randevusu</option>
+                                </select>
+                                <span id="appointmentTypeIcon" aria-hidden="true"></span>
+                                <div class="invalid-feedback">
+                                    Lütfen bir randevu tipi seçiniz.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Randevu Tarihi: Haftanın Günleri Tablosu -->
+                        <div class="mb-3">
+                            <label class="form-label">Randevu Tarihi</label>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <button type="button" class="btn btn-outline-secondary" id="prevWeekBtn" disabled aria-label="Önceki Günler">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <div id="weekDaysContainer" class="d-flex gap-2" role="group" aria-label="Haftanın Günleri">
+                                    <!-- 3 gün buraya yüklenecek -->
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary" id="nextWeekBtn" aria-label="Sonraki Günler">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <!-- Date Picker -->
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="appointmentDatePicker">Randevu Tarihi Seçiniz</label>
+                                <input type="date" class="form-control" id="appointmentDatePicker" name="appointment_date" required aria-required="true" min="">
+                                <div class="invalid-feedback">
+                                    Lütfen geçerli bir tarih seçiniz.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Randevu Saati - Butonlar -->
+                        <div class="mb-3">
+                            <label class="form-label">Randevu Saati</label>
+                            <div id="appointmentTimes" class="d-flex flex-wrap gap-2" role="group" aria-label="Randevu Saatleri">
+                                <!-- Randevu saat butonları buraya yüklenecek -->
+                            </div>
+                            <div class="invalid-feedback d-block" id="appointmentTimeFeedback">
+                                Lütfen bir randevu saati seçiniz.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Randevu Al</button>
+                    </form>
+                    <hr>
+                    <!-- Mevcut Randevular -->
+                    <h4 class="mt-4">Mevcut Randevular</h4>
+                    <ul id="appointmentsList" class="list-group" role="list">
+                        <!-- Randevular buraya yüklenecek -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast align-items-center text-white bg-primary border-0" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div id="toastIcon" class="toast-icon me-2" aria-hidden="true">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="toast-body" id="toastBody">
+                    <!-- Mesaj buraya gelecek -->
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Yükleme Göstergesi -->
+    <div id="loadingSpinner" class="d-none justify-content-center align-items-center position-fixed top-0 start-0 w-100 h-100 bg-opacity-50 bg-light" style="z-index: 12;">
+        <div class="spinner-border text-primary" role="status" aria-label="Yükleniyor">
+            <span class="visually-hidden">Yükleniyor...</span>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Bootstrap JS ve Bağımlılıkları -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome JS (İkonlar için) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Özel JS -->
+    <script src="js/patient-dashboard.js"></script>
+</body>
+
+</html>
